@@ -135,6 +135,15 @@ Pop all the values in the stack and push their sum.
 Pop the value `a` and remove that many items from the stack. Push
 their sum.
 
+### Product
+
+`prod`
+Pop all the values in the stack and push their product.
+
+`mul`
+Pop the value `a` and remove that many items from the stack. Push
+their product.
+
 ### Rounding
 
 `ceil`
@@ -152,6 +161,17 @@ Pop the value `a` and push the integer value closest to `a`.
 
 `abs`
 Pop the value `a` and push the non-negative value of `a`.
+
+### Binary operations
+
+`and`
+Pop two values `a` and `b` and push the binary AND of `a` and `b`.
+
+`or`
+Pop two values `a` and `b` and push the binary OR of `a` and `b`.
+
+`xor`
+Pop two values `a` and `b` and push the binary XOR of `a` and `b`.
 
 ### Stack manipulation
 
@@ -222,11 +242,12 @@ If set, clac will search for `$HOME/.config/clac/words`.
 
 ### How to define words
 
-Words are defined as aliases, with one alias on each line. Empty
-lines are ignored. Here are some examples:
+Words are defined as aliases, with one alias on each line.
+Empty lines are ignored. Here are some examples:
 
 ```shell
 pi 3.14159265358979323846
+# this is a comment
 tau "pi 2 *"
 sqrt "0.5 ^"
 ```
@@ -249,6 +270,22 @@ User defined words can be used as if they were built-in commands:
 $ clac "42 dup * pi *"
 5541.76944093239
 ```
+
+### Comments
+
+Any lines that begin with `#` are considered comments and
+are ignored. There are no inline comments, and any `#`
+characters that are not the first character of a line are
+interpreted literally. To define `#` as a word, wrap it in
+double quotes in the definition:
+
+```shell
+# This is a comment.
+"#" count
+```
+
+The first line is ignored, and the second line assigns `#`
+to the operation `count`.
 
 ### How to list defined words
 
